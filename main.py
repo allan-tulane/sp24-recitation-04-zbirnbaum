@@ -36,10 +36,10 @@ def word_count_map(doc):
     >>> word_count_map('i am sam i am')
     [('i', 1), ('am', 1), ('sam', 1), ('i', 1), ('am', 1)]
     """
-    ###TODO
-    
-    
-
+    words_list = []
+    for word in doc.split():
+      words_list.append((word, 1))
+    return words_list
 
 def word_count_reduce(group):
     """
@@ -53,10 +53,10 @@ def word_count_reduce(group):
     
     NOTE: you should use call the `reduce` function here.
     """
-    ###TODO
-    
-    
-
+    letter = group[0]
+    numbers = group[1]
+    tuple = (letter, reduce(plus, 0, numbers))
+    return tuple
 
 def iterate(f, x, a):
     # done. do not change me.
@@ -88,7 +88,6 @@ def collect(pairs):
         result[pair[0]].append(pair[1])
     return list(result.items())
 
-
 def plus(x, y):
     # done. do not change me.
     return x + y
@@ -101,13 +100,9 @@ def reduce(f, id_, a):
         return a[0]
     else:
         return f(reduce(f, id_, a[:len(a)//2]),
-                 reduce(f, id_, a[len(a)//2:]))
-    
-    
-    
+                 reduce(f, id_, a[len(a)//2:])) 
     
 ### PART TWO ###
-
 def sentiment_map(doc,
                   pos_terms=set(['good', 'great', 'awesome', 'sockdolager']),
                   neg_terms=set(['bad', 'terrible', 'waste', 'carbuncle', 'corrupted'])):
@@ -122,5 +117,11 @@ def sentiment_map(doc,
     >>> sentiment_map('it was a terrible waste of time')
     [('negative', 1), ('negative', 1)]
     """
-    ###TODO
-
+    sentiment_list = []
+    for word in doc.split():
+      print(word)
+      if word in pos_terms:
+        sentiment_list.append(('positive', 1))
+      elif word in neg_terms:
+        sentiment_list.append(('negative', 1)) 
+    return sentiment_list
